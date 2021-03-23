@@ -7,7 +7,7 @@ const {PythonShell} =require('python-shell');
 app.get("/scrapper", (req, res, next)=>{ 
     //Here are the option object in which arguments can be passed for the python_test.js. 
 
-    console.log('ASDASDSA :',req.query)
+    console.log('In GET /scrapper :',req.query)
 
     let options = { 
         mode: 'text', 

@@ -11,7 +11,6 @@ import Container from '@material-ui/core/Container';
 import axios from "axios";
 
 import MetaData from './MetaData'
-import { RootRef } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+      width: '100%',
       marginTop: theme.spacing(1),
     },
     submit: {
@@ -37,27 +36,30 @@ function Form(props) {
 
     const classes = useStyles();
 
-    const [url,setUrl] = React.useState("");
+    var [url,setUrl] = React.useState("");
     const [flag,setFlag] = React.useState(false);
     const [data,setData] = React.useState({});
 
-    const APICall = () =>{
+    const APICall = async () =>{
 
         console.log('In function')
+        setUrl(url);
 
-        axios.get('/scrapper',{
+        await axios.get('/scrapper',{
             params: {
             link: url
         }})
         .then((res)=>{
-
-            // console.log('RES :',JSON.parse(res.data[0]))
             setData(JSON.parse(res.data[0]))
         })
         .catch(err => console.log('ERR :',err))
 
         setFlag(true)
     }
+
+    React.useEffect(()=>{
+
+    },[flag])
 
     return (
         <div>
@@ -68,7 +70,7 @@ function Form(props) {
                 <LinkIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                Enter URL
+                    Enter URL
                 </Typography>
                 <form className={classes.form} noValidate>
                 <TextField
@@ -81,9 +83,9 @@ function Form(props) {
                     autoComplete="link"
                     autoFocus
                     onChange={(event)=>{
-                        setUrl(event.target.value);
+                        url = event.target.value;
                     }}
-                    value={url}
+                    // value={url}
                 />
             
                 <Button
@@ -91,7 +93,8 @@ function Form(props) {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                    onClick={APICall}
+                    onClick={
+                        APICall}
                 >
                     Get MetaData
                 </Button>
@@ -99,7 +102,7 @@ function Form(props) {
             </div>
             </Container>
 
-            {flag && <MetaData data={data}/>}
+            {flag && <MetaData data={data} flag={flag}/>}
 
         </div>
     );

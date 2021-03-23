@@ -1,115 +1,123 @@
 import React from 'react';
-import {Container,List,ListItem,Typography,Divider,ListItemText} from '@material-ui/core'
+import {Container,Box,List,ListItem,Typography,CardMedia,Card} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-    width: '100%',
-    maxWidth: '36ch',
-    backgroundColor: theme.palette.background.paper,
+        width: '100%',
+        maxWidth: '36ch',
+        backgroundColor: theme.palette.background.paper,
     },
-    inline: {
-    display: 'inline',
+    paper: {
+        marginTop: theme.spacing(8),
+        paddingTop: theme.spacing(2),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+      },
 }));
 
 function MetaData(props) {
-console.log('PRRPR :',props.data.og)
+
+    console.log('PRRPR :',props.flag,props.data)
 
     const classes = useStyles();
-   
+
     return (
-        <div>
-            {/* <Container>
-                <List className={classes.root}>
-                
-                    <ListItem alignItems="flex-start">
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary"
-                            >
-                                URL
-                            </Typography>
-
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                className={classes.inline}
-                                color="textPrimary"
-                            >
-                                {props.data.og.url}
-                            </Typography>
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-
-                    <ListItem alignItems="flex-start">
+            <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+                    <ListItem alignItems="flex-start" >
+                        <Card>
                         <Typography
                             component="span"
                             variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
+                            color="primary"
                         >
-                            Title
+                            URL : &nbsp;
                         </Typography>
 
                         <Typography
                             component="span"
                             variant="body2"
-                            className={classes.inline}
+                            color="textPrimary"
+                        >
+                            {props.data.og.url}
+                        </Typography>
+                        </Card>
+                    </ListItem>
+
+                    <ListItem alignItems="flex-start">
+                        <Card>
+                        <Typography
+                            component="span"
+                            variant="body2"
+                            color="primary"
+                        >
+                            Title : &nbsp;
+                        </Typography>
+
+                        <Typography
+                            component="span"
+                            variant="body2"
                             color="textPrimary"
                         >
                             {props.data.og.title}
                         </Typography>
+                        </Card>
                     </ListItem>
-                    <Divider variant="inset" component="li" />
 
                     <ListItem alignItems="flex-start">
+                        <Card>
                         <Typography
                             component="span"
                             variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
+                            color="primary"
                         >
-                            Description
+                            Description : &nbsp;
                         </Typography>
 
                         <Typography
                             component="span"
                             variant="body2"
-                            className={classes.inline}
                             color="textPrimary"
                         >
                             {props.data.og.description}
                         </Typography>
+                        </Card>
                     </ListItem>
-                    <Divider variant="inset" component="li" />
 
                     <ListItem alignItems="flex-start">
+                        <Card>
                         <Typography
                             component="span"
                             variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
+                            align="center"
+                            color="primary"
                         >
-                            Image
+                            Image : &nbsp;
                         </Typography>
 
                         <Typography
                             component="span"
                             variant="body2"
-                            className={classes.inline}
+                            align="center"
                             color="textPrimary"
                         >
-                            {props.data.og.image}
+                            <CardMedia
+                                className={classes.media}
+                                image={props.data.og.image}
+                                title="Paella dish"
+                            />
                         </Typography>
+                        </Card>
                     </ListItem>
-                    <Divider variant="inset" component="li" />
 
-                </List>
-            </Container> */}
-        </div>
+            </div>
+            </Container>
     );
 }
 
