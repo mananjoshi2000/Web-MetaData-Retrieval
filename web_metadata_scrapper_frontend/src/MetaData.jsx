@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container,Box,List,ListItem,Typography,CardMedia,Card} from '@material-ui/core'
+import {Container,Box,List,ListItem,Typography,CardMedia,Card,Link} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,8 +17,12 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
+        width: 450+'px',
+        paddingTop: '56.25%',
       },
+    card:{
+        margin:5+'%'
+      }
 }));
 
 function MetaData(props) {
@@ -28,13 +32,13 @@ function MetaData(props) {
     const classes = useStyles();
 
     return (
-            <Container component="main" maxWidth="xs">
-            <div className={classes.paper}>
+            <Container component="main" maxWidth="sm">
+                <div className={classes.paper}>
                     <ListItem alignItems="flex-start" >
-                        <Card>
+                        <Box>
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             color="primary"
                         >
                             URL : &nbsp;
@@ -42,19 +46,19 @@ function MetaData(props) {
 
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             color="textPrimary"
                         >
                             {props.data.og.url}
                         </Typography>
-                        </Card>
+                        </Box>
                     </ListItem>
 
                     <ListItem alignItems="flex-start">
-                        <Card>
+                        <Box>
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             color="primary"
                         >
                             Title : &nbsp;
@@ -62,19 +66,19 @@ function MetaData(props) {
 
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             color="textPrimary"
                         >
                             {props.data.og.title}
                         </Typography>
-                        </Card>
+                        </Box>
                     </ListItem>
 
                     <ListItem alignItems="flex-start">
-                        <Card>
+                        <Box>
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             color="primary"
                         >
                             Description : &nbsp;
@@ -82,19 +86,19 @@ function MetaData(props) {
 
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             color="textPrimary"
                         >
                             {props.data.og.description}
                         </Typography>
-                        </Card>
+                        </Box>
                     </ListItem>
 
                     <ListItem alignItems="flex-start">
-                        <Card>
+                        <Box>
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             align="center"
                             color="primary"
                         >
@@ -103,20 +107,25 @@ function MetaData(props) {
 
                         <Typography
                             component="span"
-                            variant="body2"
+                            variant="h6"
                             align="center"
                             color="textPrimary"
                         >
+                        <Link href={props.data.og.image} color='secondary' target='_blank'>
+                            Image Link
+                        </Link>
+                        <Card className={classes.card}>
                             <CardMedia
                                 className={classes.media}
+                                component="div"
                                 image={props.data.og.image}
                                 title="Paella dish"
                             />
-                        </Typography>
                         </Card>
+                        </Typography>
+                        </Box>
                     </ListItem>
-
-            </div>
+                </div>
             </Container>
     );
 }
