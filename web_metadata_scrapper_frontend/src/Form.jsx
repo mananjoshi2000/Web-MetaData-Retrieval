@@ -50,6 +50,7 @@ function Form(props) {
             link: url
         }})
         .then((res)=>{
+            console.log('Res: ',res.data)
             setData(JSON.parse(res.data[0]))
         })
         .catch(err => console.log('ERR :',err))

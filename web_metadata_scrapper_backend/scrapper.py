@@ -7,11 +7,89 @@ Original file is located at
     https://colab.research.google.com/drive/1u23K_y1nWdql1-ioPjuQ8lXINP91fzOx
 """
 import sys
+# import metadata_parser
+
+# url = sys.argv[1]
+
+# page = metadata_parser.MetadataParser(url)
+# data = str(page.metadata)
+# D = data.replace("'","\"")
+# print(D)
+
+
+
+# !pip install metadata_parser
+
+# url = "https://www.youtube.com/watch?v=-NuZduxoqnE"
 import metadata_parser
+import json
 
 url = sys.argv[1]
 
 page = metadata_parser.MetadataParser(url)
-data = str(page.metadata)
-D = data.replace("'","\"")
-print(D)
+
+# print("methods in page class :",dir(page))
+
+data = page.metadata
+
+# print(data)
+
+res = {
+  "title": "",
+  "description": "",
+  "image": "",
+  "url":""
+}
+
+if 'og' in data and ('title' in data["og"] or 'Title' in data["og"]):
+  if 'title' in data["og"]:
+    res["title"]=data["og"]["title"]
+  elif 'Title' in data["og"]:
+    res["title"]=data["og"]["Title"]
+elif 'meta' in data and ('title' in data["meta"] or 'Title' in data["meta"]):
+  if 'title' in data["meta"]:
+    res["title"]=data["meta"]["title"]
+  elif 'Title' in data["meta"]:
+    res["title"]=data["meta"]["Title"]
+elif 'page' in data and ('title' in data["page"] or 'Title' in data["page"]):
+  if 'title' in data["page"]:
+    res["title"]=data["page"]["title"]
+  elif 'Title' in data["page"]:
+    res["title"]=data["page"]["Title"]
+
+
+if 'og' in data and ('description' in data["og"] or 'Description' in data["og"]):
+  if 'description' in data["og"]:
+    res["description"]=data["og"]["description"]
+  elif 'Description' in data["og"]:
+    res["description"]=data["og"]["Description"]
+elif 'meta' in data and ('description' in data["meta"] or 'Description' in data["meta"]):
+  if 'description' in data["meta"]:
+    res["description"]=data["meta"]["description"]
+  elif 'Description' in data["meta"]:
+    res["description"]=data["meta"]["Description"]
+elif 'page' in data and ('description' in data["page"] or 'Description' in data["page"]):
+  if 'description' in data["page"]:
+    res["description"]=data["page"]["description"]
+  elif 'Description' in data["page"]:
+    res["description"]=data["page"]["Description"]
+
+if 'og' in data and 'image' in data["og"]:
+  res["image"]=data["og"]["image"]
+elif 'meta' in data and 'image' in data["meta"]:
+  res["image"]=data["meta"]["image"]
+elif 'page' in data and 'image' in data["page"]:
+  res["image"]=data["page"]["image"]
+
+res["url"] = page.url
+
+for x in res:
+  res[x] = res[x].replace("'","")
+  res[x] = res[x].replace("\"","")
+
+res = str(res).replace("'","\"")
+
+print(res)
+
+
+

@@ -49,7 +49,7 @@ function MetaData(props) {
                             variant="h6"
                             color="textPrimary"
                         >
-                            {props.data.og.url}
+                            {props.data.url}
                         </Typography>
                         </Box>
                     </ListItem>
@@ -69,7 +69,7 @@ function MetaData(props) {
                             variant="h6"
                             color="textPrimary"
                         >
-                            {props.data.og.title}
+                            {props.data.title}
                         </Typography>
                         </Box>
                     </ListItem>
@@ -89,7 +89,7 @@ function MetaData(props) {
                             variant="h6"
                             color="textPrimary"
                         >
-                            {props.data.og.description}
+                            {props.data.description}
                         </Typography>
                         </Box>
                     </ListItem>
@@ -111,14 +111,14 @@ function MetaData(props) {
                             align="center"
                             color="textPrimary"
                         >
-                        <Link href={props.data.og.image} color='secondary' target='_blank'>
+                        <Link href={props.data.image} color='secondary' target='_blank'>
                             Image Link
                         </Link>
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.media}
                                 component="div"
-                                image={props.data.og.image}
+                                image={props.data.image}
                                 title="Paella dish"
                             />
                         </Card>
