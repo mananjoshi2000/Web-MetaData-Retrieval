@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 function MetaData(props) {
 
-    console.log('PRRPR :',props.flag,props.data)
+    // console.log('PRRPR :',props.flag,props.data)
 
     const classes = useStyles();
 
@@ -47,10 +47,14 @@ function MetaData(props) {
                         <Typography
                             component="span"
                             variant="h6"
-                            color="textPrimary"
                         >
-                            {props.data.url}
+                            <Link href={props.data.web_page} color='secondary' target='_blank'>
+                                {props.data.web_page}
+                            </Link>
                         </Typography>
+                            
+                        
+                        
                         </Box>
                     </ListItem>
 
@@ -111,14 +115,14 @@ function MetaData(props) {
                             align="center"
                             color="textPrimary"
                         >
-                        <Link href={props.data.image} color='secondary' target='_blank'>
+                        <Link href={props.data.thumbnail} color='secondary' target='_blank'>
                             Image Link
                         </Link>
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.media}
                                 component="div"
-                                image={props.data.image}
+                                image={props.data.thumbnail}
                                 title="Paella dish"
                             />
                         </Card>

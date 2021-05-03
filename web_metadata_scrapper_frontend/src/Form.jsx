@@ -40,18 +40,21 @@ function Form(props) {
     const [flag,setFlag] = React.useState(false);
     const [data,setData] = React.useState({});
 
+    const API_KEY = "2b7c76a7-bb62-462b-b347-5a352db2831b"
+
     const APICall = async () =>{
 
-        console.log('In function')
+        // console.log('In function')
         setUrl(url);
 
         await axios.get('/scrapper',{
             params: {
-            link: url
+                api_key: API_KEY,
+                web_page: url
         }})
         .then((res)=>{
-            console.log('Res: ',res.data)
-            setData(JSON.parse(res.data[0]))
+            // console.log('Res: ',res)
+            setData(res.data)
         })
         .catch(err => console.log('ERR :',err))
 

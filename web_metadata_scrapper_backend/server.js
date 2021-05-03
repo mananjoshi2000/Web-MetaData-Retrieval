@@ -2,24 +2,27 @@
 const express = require("express"); 
 const app = express(); 
 
+const axios = require("axios")
+
+var cors = require('cors')
+
+app.use(cors())
+
 const {PythonShell} =require('python-shell'); 
   
-app.get("/scrapper", (req, res, next)=>{ 
-    //Here are the option object in which arguments can be passed for the python_test.js. 
+app.get("/scrapper", async (req, res, next)=>{ 
 
-    let options = { 
-        mode: 'text', 
-        pythonOptions: ['-u'], 
-        args: [req.query.link] 
-    }; 
-  
-    PythonShell.run('scrapper.py', options, function (err, result){ 
-          if (err)  console.log('Err :',err)
-          // result is an array consisting of messages collected  
-          //during execution of script. 
-          console.log('result: ', result);
-          res.send(result) 
-    }); 
+    // console.log(req.query)
+    await axios.get("https://web-metadata.herokuapp.com/api",{
+        params: {
+            api_key: req.query.api_key,
+            web_page: req.query.web_page
+    }})
+    .then((resp)=>{
+        // console.log('RRRRes: ',resp.data)
+        res.send(resp.data)
+    })
+    .catch(err => console.log('ERR :',err))
 }); 
   
 const PORT = process.env.PORT || 8080; 
