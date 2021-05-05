@@ -20,7 +20,12 @@ app.get("/scrapper", async (req, res, next)=>{
     }})
     .then((resp)=>{
         // console.log('RRRRes: ',resp.data)
-        res.send(resp.data)
+
+        var time2 = Date.now();
+
+        console.log('Time - ',time2)
+
+        res.send({...resp.data,'time' : time2})
     })
     .catch(err => console.log('ERR :',err))
 }); 

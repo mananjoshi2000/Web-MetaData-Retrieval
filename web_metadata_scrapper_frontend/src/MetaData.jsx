@@ -29,11 +29,37 @@ function MetaData(props) {
 
     // console.log('PRRPR :',props.flag,props.data)
 
+    console.log('Time - ',props.data.time)
+
     const classes = useStyles();
 
     return (
             <Container component="main" maxWidth="sm">
                 <div className={classes.paper}>
+
+                    <ListItem alignItems="flex-start" >
+                        <Box>
+                        <Typography
+                            component="span"
+                            variant="h6"
+                            color="primary"
+                        >
+                            Response Time : &nbsp;
+                        </Typography>
+
+                        <Typography
+                            component="span"
+                            variant="h6"
+                            style={{fontWeight:"bold"}}
+                        >
+                            {props.data.time} ms
+                         </Typography>
+                            
+                        
+                        
+                        </Box>
+                    </ListItem>
+
                     <ListItem alignItems="flex-start" >
                         <Box>
                         <Typography
@@ -52,9 +78,7 @@ function MetaData(props) {
                                 {props.data.web_page}
                             </Link>
                         </Typography>
-                            
-                        
-                        
+                          
                         </Box>
                     </ListItem>
 
